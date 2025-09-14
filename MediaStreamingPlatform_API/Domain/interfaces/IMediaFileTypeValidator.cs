@@ -1,4 +1,4 @@
-﻿namespace MediaStreamingPlatform_API.interfaces
+﻿namespace MediaStreamingPlatform_API.Domain.interfaces
 {
     public interface IMediaFileTypeValidator
     {

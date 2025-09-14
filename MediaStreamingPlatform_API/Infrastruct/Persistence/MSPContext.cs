@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace MediaStreamingPlatform_API
+namespace MediaStreamingPlatform_API.Infrastruct.Persistence
 {
     public class MSPContext : DbContext
     {

@@ -1,6 +1,6 @@
-﻿using MediaStreamingPlatform_API.interfaces;
+﻿using MediaStreamingPlatform_API.Domain.interfaces;
 
-namespace MediaStreamingPlatform_API
+namespace MediaStreamingPlatform_API.Domain.Specifications
 {
     public class MediaFileTypeValidator : IMediaFileTypeValidator
     {

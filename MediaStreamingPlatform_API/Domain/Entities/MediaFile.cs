@@ -6,8 +6,8 @@ public class MediaFile
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
-    public string FileName { get; set; } = string.Empty; 
-    public string FilePath { get; set; } = string.Empty;
+    public string FileName { get; set; } = string.Empty;
+    public byte[] FileContent { get; set; } = Array.Empty<byte>();
     public string ContentType { get; set; } = string.Empty;
     public long FileSize { get; set; }        
     public MediaType Type { get; set; }       

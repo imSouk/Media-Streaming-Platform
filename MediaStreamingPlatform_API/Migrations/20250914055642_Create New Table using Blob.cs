@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MediaStreamingPlatform_API.Migrations
 {
     /// <inheritdoc />
-    public partial class TableCreateintID : Migration
+    public partial class CreateNewTableusingBlob : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,7 @@ namespace MediaStreamingPlatform_API.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FileName = table.Column<string>(type: "text", nullable: false),
-                    FilePath = table.Column<string>(type: "text", nullable: false),
+                    FileContent = table.Column<byte[]>(type: "bytea", nullable: false),
                     ContentType = table.Column<string>(type: "text", nullable: false),
                     FileSize = table.Column<long>(type: "bigint", nullable: false),
                     Type = table.Column<int>(type: "integer", nullable: false),
