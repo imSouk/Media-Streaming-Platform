@@ -1,60 +1,85 @@
-// ShowMediaFiles.tsx
-import { useEffect, useState } from "react";
-import { mapFiles } from "../CustomHooks/mapFiles";
-import type { MediaFile } from "../Functions";
+import { useState, useEffect, useRef } from "react";
+import { useMediaFiles } from "../CustomHooks/mapFiles";
 
 export default function ShowMediaFiles() {
-  const { allMedias, Isloading } = mapFiles();
-  const [medias, setMedias] = useState<MediaFile[]>([]);
+  const { medias, mediaBlobs, isLoading, error } = useMediaFiles();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [fadeIn, setFadeIn] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+
+  const media = medias[currentIndex];
+  const blobUrl = mediaBlobs?.[media?.id];
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    const fetchMedias = async () => {
-      const result = await allMedias();
-      setMedias(result || []);
-    };
-    fetchMedias();
-  }, []);
+    if (!media || !blobUrl) return;
 
-  if (Isloading) {
-    return <p>Carregando mídias...</p>;
-  }
+    setFadeIn(true);
 
-  if (medias.length === 0) {
-    return <p>Nenhuma mídia encontrada.</p>;
-  }
+    if (media.type === 1) {
+      const timer = setTimeout(() => {
+        setFadeIn(false);
+        setTimeout(() => setCurrentIndex((prev) => (prev + 1) % medias.length), 500);
+      }, 4000);
+
+      return () => clearTimeout(timer);
+    } else {
+      // Reset mute for new video
+      setIsMuted(true);
+    }
+  }, [currentIndex, media, blobUrl, medias.length]);
+
+  const nextMedia = () => {
+    setFadeIn(false);
+    setTimeout(() => setCurrentIndex((prev) => (prev + 1) % medias.length), 500);
+  };
+
+  const toggleMute = () => {
+    setIsMuted((prev) => !prev);
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+    }
+  };
+
+  if (isLoading) return <p className="text-center mt-10 text-white">Loading...</p>;
+  if (error) return <p className="text-red-500 text-center mt-10">Error: {error}</p>;
+  if (!media) return <p className="text-center mt-10 text-white">No media found.</p>;
 
   return (
-    <div className="grid grid-cols-3 gap-4">
-      {medias.map((media) => (
-        <div key={media.id} className="p-2 border rounded shadow">
-          {media.type === 1 && (
-            <img
-              src={media.filePath.replace(/\\/g, "/")} // transforma \ em /
-              alt={media.fileName}
-              className="w-full h-auto rounded"
-            />
-          )}
-          {media.type === 2 && (
-            <video controls className="w-full rounded">
-              <source
-                src={media.filePath.replace(/\\/g, "/")}
-                type="video/mp4"
-              />
-              Seu navegador não suporta vídeo.
-            </video>
-          )}
-          {media.type === 3 && (
-            <audio controls className="w-full">
-              <source
-                src={media.filePath.replace(/\\/g, "/")}
-                type="audio/mpeg"
-              />
-              Seu navegador não suporta áudio.
-            </audio>
-          )}
-          {!media.type && <p>{media.filePath}</p>}
-        </div>
-      ))}
+    <div className="fixed inset-0 w-screen h-screen bg-black overflow-hidden">
+      {blobUrl && media.type === 1 && (
+        <img
+          key={media.id}
+          src={blobUrl}
+          alt={media.fileName}
+          className={`absolute inset-0 w-full h-full object-contain sm:object-cover transition-opacity duration-500 ${
+            fadeIn ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      )}
+
+      {blobUrl && media.type === 2 && (
+        <>
+          <video
+            ref={videoRef}
+            key={media.id}
+            autoPlay
+            muted={isMuted}
+            onEnded={nextMedia}
+            className={`absolute inset-0 w-full h-full object-contain sm:object-cover transition-opacity duration-500 ${
+              fadeIn ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <source src={blobUrl} type={media.contentType} />
+          </video>
+          <button
+            onClick={toggleMute}
+            className="absolute bottom-4 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded"
+          >
+            {isMuted ? "Unmute" : "Mute"}
+          </button>
+        </>
+      )}
     </div>
   );
 }

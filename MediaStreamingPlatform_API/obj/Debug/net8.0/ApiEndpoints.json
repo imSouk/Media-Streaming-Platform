@@ -3,7 +3,7 @@
     "ContainingType": "MediaStreamingPlatform_API.Presentation.Controllers.MediaFileController",
     "Method": "DeleteMediaFile",
     "RelativePath": "{id}",
-    "HttpMethod": "POST",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -23,6 +23,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaStreamingPlatform_API.Presentation.Controllers.MediaFileController",
+    "Method": "GetFileContent",
+    "RelativePath": "MediaFile/GetFileContent",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Int32[]",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

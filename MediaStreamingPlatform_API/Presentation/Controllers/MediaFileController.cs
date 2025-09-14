@@ -1,5 +1,6 @@
 using MediaStreamingPlatform_API.Domain.interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.Eventing.Reader;
 
 namespace MediaStreamingPlatform_API.Presentation.Controllers
 {
@@ -28,16 +29,18 @@ namespace MediaStreamingPlatform_API.Presentation.Controllers
             return BadRequest("Cant save ur file.");
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("/{id}")]
         public async Task<IActionResult> DeleteMediaFile( int id)
         {
           if(id > 0)
             {
-               var result = await _mediaFileService.DeleteMediaFIleById(id);
+                var result = await _mediaFileService.DeleteMediaFIleById(id);
                 return Ok(result);
+               
             }
-            return BadRequest("Cant Delete this Media");
+            return BadRequest("Invalid Id");
+            
         }
 
         [HttpGet]
@@ -48,18 +51,16 @@ namespace MediaStreamingPlatform_API.Presentation.Controllers
                 return Ok(result);
 
         }
-        [HttpGet]
-        [Route("/GetFileContent{id}")]
-        public async Task<FileResult> GetFileConent([FromBody]int id)
+        [HttpPost]
+        [Route("GetFileContent")]
+        public async Task<IActionResult> GetFileContent([FromBody] int[] ids)
         {
-           var blob =  _mediaFileService.DeleteMediaFIleById(id);
-           if(blob != null)
+            var blobList = await _mediaFileService.GetBlobById(ids);
+            if (blobList != null)
             {
-                return blob;
+                return Ok(blobList);
             }
-
+            return BadRequest("Cant find any items with this ID");
         }
-
-
     }
 }

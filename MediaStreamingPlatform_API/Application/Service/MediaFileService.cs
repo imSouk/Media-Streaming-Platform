@@ -15,16 +15,16 @@ namespace MediaStreamingPlatform_API.Application.UseCases
             _mediaFileTypeValidator = mediaFileTypeValidator;
             
         }
-        public Task<string> DeleteMediaFIleById(int id)
+        public async Task<string> DeleteMediaFIleById(int id)
         {
-           var media =  _mediaFileRepository.GetMediaFileById(id);
+           var media = await _mediaFileRepository.GetMediaFileById(id);
             if (media == null)
             {
-                throw new NullReferenceException("Cant Find This Media");
+                return $"Media not found";
             }
             _mediaFileRepository.DeleteMediaFile(media);
             string result = $"Delete Media {media.FileName} with ID = {id}";
-            return Task.FromResult(result);
+            return result;
         }
 
         public Task<List<MediaFileDto>> GetAllMediaFilesDtos()
@@ -43,19 +43,27 @@ namespace MediaStreamingPlatform_API.Application.UseCases
             return Task.FromResult(Dtos);
         }
 
-        public async Task<MediaFileBlobDto> GetMediaFileById(int id)
+        public async Task<List<MediaFileBlobDto>> GetBlobById(int[] ids)
         {
-            MediaFile file =  await _mediaFileRepository.GetMediaFileById(id);
-            MediaFileBlobDto blob = new MediaFileBlobDto();
-            blob.FileName = file.FileName;
-            blob.FileContent = file.FileContent;
-            blob.ContentType = file.ContentType;
-            return blob;
+            List<MediaFileBlobDto> list = new List<MediaFileBlobDto> ();
+            foreach (int id in ids) {            
+                MediaFile file = await _mediaFileRepository.GetMediaFileById(id);
+                MediaFileBlobDto blob = new MediaFileBlobDto();
+                if (file == null)
+                {
+                    return null;
+                }
+                blob.FileName = file.FileName;
+                blob.FileContent = file.FileContent;
+                blob.ContentType = file.ContentType;
+                list.Add(blob);
+            }
+            
+            return list;
         }
 
         public Task MapAndSaveMediaFile(IFormFile formFile, byte[] fileContent)
         {
-           
             try
             {
                 MediaFile file = new MediaFile();

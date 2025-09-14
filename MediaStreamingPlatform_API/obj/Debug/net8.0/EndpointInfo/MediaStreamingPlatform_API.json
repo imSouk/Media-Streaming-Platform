@@ -38,7 +38,7 @@
       }
     },
     "/{id}": {
-      "post": {
+      "delete": {
         "tags": [
           "MediaFile"
         ],
@@ -65,6 +65,49 @@
         "tags": [
           "MediaFile"
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/MediaFile/GetFileContent": {
+      "post": {
+        "tags": [
+          "MediaFile"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"

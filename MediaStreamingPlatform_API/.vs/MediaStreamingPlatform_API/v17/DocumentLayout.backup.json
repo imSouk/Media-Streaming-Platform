@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8D009392-8614-4ABC-827C-FE772867FC97}|MediaStreamingPlatform_API.csproj|c:\\users\\pedro\\desktop\\desafio_tecnico\\media-streaming-platform\\mediastreamingplatform_api\\application\\service\\mediafileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8D009392-8614-4ABC-827C-FE772867FC97}|MediaStreamingPlatform_API.csproj|solutionrelative:application\\service\\mediafileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8D009392-8614-4ABC-827C-FE772867FC97}|MediaStreamingPlatform_API.csproj|c:\\users\\pedro\\desktop\\desafio_tecnico\\media-streaming-platform\\mediastreamingplatform_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D009392-8614-4ABC-827C-FE772867FC97}|MediaStreamingPlatform_API.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8D009392-8614-4ABC-827C-FE772867FC97}|MediaStreamingPlatform_API.csproj|c:\\users\\pedro\\desktop\\desafio_tecnico\\media-streaming-platform\\mediastreamingplatform_api\\presentation\\controllers\\mediafilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8D009392-8614-4ABC-827C-FE772867FC97}|MediaStreamingPlatform_API.csproj|solutionrelative:presentation\\controllers\\mediafilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D009392-8614-4ABC-827C-FE772867FC97}|MediaStreamingPlatform_API.csproj|c:\\users\\pedro\\desktop\\desafio_tecnico\\media-streaming-platform\\mediastreamingplatform_api\\application\\service\\mediafileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D009392-8614-4ABC-827C-FE772867FC97}|MediaStreamingPlatform_API.csproj|solutionrelative:application\\service\\mediafileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8D009392-8614-4ABC-827C-FE772867FC97}|MediaStreamingPlatform_API.csproj|c:\\users\\pedro\\desktop\\desafio_tecnico\\media-streaming-platform\\mediastreamingplatform_api\\domain\\interfaces\\imediafileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,12 +23,12 @@
       "RelativeMoniker": "D:0:0:{8D009392-8614-4ABC-827C-FE772867FC97}|MediaStreamingPlatform_API.csproj|solutionrelative:infrastruct\\persistence\\mediafilerepository.cs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8D009392-8614-4ABC-827C-FE772867FC97}|MediaStreamingPlatform_API.csproj|c:\\users\\pedro\\desktop\\desafio_tecnico\\media-streaming-platform\\mediastreamingplatform_api\\domain\\interfaces\\imediafilerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8D009392-8614-4ABC-827C-FE772867FC97}|MediaStreamingPlatform_API.csproj|solutionrelative:domain\\interfaces\\imediafilerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{8D009392-8614-4ABC-827C-FE772867FC97}|MediaStreamingPlatform_API.csproj|c:\\users\\pedro\\desktop\\desafio_tecnico\\media-streaming-platform\\mediastreamingplatform_api\\application\\dtos\\mediafiledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8D009392-8614-4ABC-827C-FE772867FC97}|MediaStreamingPlatform_API.csproj|solutionrelative:application\\dtos\\mediafiledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D009392-8614-4ABC-827C-FE772867FC97}|MediaStreamingPlatform_API.csproj|c:\\users\\pedro\\desktop\\desafio_tecnico\\media-streaming-platform\\mediastreamingplatform_api\\domain\\interfaces\\imediafilerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D009392-8614-4ABC-827C-FE772867FC97}|MediaStreamingPlatform_API.csproj|solutionrelative:domain\\interfaces\\imediafilerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8D009392-8614-4ABC-827C-FE772867FC97}|MediaStreamingPlatform_API.csproj|c:\\users\\pedro\\desktop\\desafio_tecnico\\media-streaming-platform\\mediastreamingplatform_api\\application\\dtos\\mediafileblobdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,21 +42,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 347,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "MediaFileBlobDto.cs",
-              "DocumentMoniker": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Application\\DTOs\\MediaFileBlobDto.cs",
-              "RelativeDocumentMoniker": "Application\\DTOs\\MediaFileBlobDto.cs",
-              "ToolTip": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Application\\DTOs\\MediaFileBlobDto.cs*",
-              "RelativeToolTip": "Application\\DTOs\\MediaFileBlobDto.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-14T06:25:08.645Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -64,6 +55,32 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Program.cs*",
+              "RelativeToolTip": "Program.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T21:10:18.72Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MediaFileBlobDto.cs",
+              "DocumentMoniker": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Application\\DTOs\\MediaFileBlobDto.cs",
+              "RelativeDocumentMoniker": "Application\\DTOs\\MediaFileBlobDto.cs",
+              "ToolTip": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Application\\DTOs\\MediaFileBlobDto.cs",
+              "RelativeToolTip": "Application\\DTOs\\MediaFileBlobDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAAAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T06:25:08.645Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -80,15 +97,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "MediaFileRepository.cs.cs",
               "DocumentMoniker": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Infrastruct\\Persistence\\MediaFileRepository.cs.cs",
               "RelativeDocumentMoniker": "Infrastruct\\Persistence\\MediaFileRepository.cs.cs",
-              "ToolTip": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Infrastruct\\Persistence\\MediaFileRepository.cs.cs*",
-              "RelativeToolTip": "Infrastruct\\Persistence\\MediaFileRepository.cs.cs*",
+              "ToolTip": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Infrastruct\\Persistence\\MediaFileRepository.cs.cs",
+              "RelativeToolTip": "Infrastruct\\Persistence\\MediaFileRepository.cs.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAQwCIAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-14T04:39:19.917Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IMediaFileService.cs",
+              "DocumentMoniker": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Domain\\interfaces\\IMediaFileService.cs",
+              "RelativeDocumentMoniker": "Domain\\interfaces\\IMediaFileService.cs",
+              "ToolTip": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Domain\\interfaces\\IMediaFileService.cs",
+              "RelativeToolTip": "Domain\\interfaces\\IMediaFileService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAcAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T04:12:38.825Z",
               "EditorCaption": ""
             },
             {
@@ -97,9 +127,9 @@
               "Title": "MediaFileController.cs",
               "DocumentMoniker": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Presentation\\Controllers\\MediaFileController.cs",
               "RelativeDocumentMoniker": "Presentation\\Controllers\\MediaFileController.cs",
-              "ToolTip": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Presentation\\Controllers\\MediaFileController.cs*",
-              "RelativeToolTip": "Presentation\\Controllers\\MediaFileController.cs*",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAqwDYAAAAgAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Presentation\\Controllers\\MediaFileController.cs",
+              "RelativeToolTip": "Presentation\\Controllers\\MediaFileController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAawBIAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-14T04:19:06.964Z",
               "EditorCaption": ""
@@ -107,38 +137,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "IMediaFileService.cs",
-              "DocumentMoniker": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Domain\\interfaces\\IMediaFileService.cs",
-              "RelativeDocumentMoniker": "Domain\\interfaces\\IMediaFileService.cs",
-              "ToolTip": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Domain\\interfaces\\IMediaFileService.cs*",
-              "RelativeToolTip": "Domain\\interfaces\\IMediaFileService.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-14T04:12:38.825Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "MediaFileService.cs",
               "DocumentMoniker": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Application\\Service\\MediaFileService.cs",
               "RelativeDocumentMoniker": "Application\\Service\\MediaFileService.cs",
-              "ToolTip": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Application\\Service\\MediaFileService.cs*",
-              "RelativeToolTip": "Application\\Service\\MediaFileService.cs*",
-              "ViewState": "AgIAABsAAAAAAAAAAAAowDIAAAAZAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Application\\Service\\MediaFileService.cs",
+              "RelativeToolTip": "Application\\Service\\MediaFileService.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAmwBYAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-14T04:12:19.777Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "IMediaFileRepository.cs",
               "DocumentMoniker": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Domain\\interfaces\\IMediaFileRepository.cs",
               "RelativeDocumentMoniker": "Domain\\interfaces\\IMediaFileRepository.cs",
-              "ToolTip": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Domain\\interfaces\\IMediaFileRepository.cs*",
-              "RelativeToolTip": "Domain\\interfaces\\IMediaFileRepository.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAYAAAAeAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\pedro\\Desktop\\desafio_tecnico\\Media-Streaming-Platform\\MediaStreamingPlatform_API\\Domain\\interfaces\\IMediaFileRepository.cs",
+              "RelativeToolTip": "Domain\\interfaces\\IMediaFileRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-14T04:05:49.128Z",
               "EditorCaption": ""
