@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "Pf0705nndZ0oM0EAubytjma0Bp+Q7u0ThTF1nNcolaQ=",
+  "Source": "MediaStreamingPlatform_API",
+  "BasePath": "_content/MediaStreamingPlatform_API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
