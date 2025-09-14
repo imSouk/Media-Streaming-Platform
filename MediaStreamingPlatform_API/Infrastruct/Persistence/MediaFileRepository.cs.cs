@@ -30,9 +30,9 @@ namespace MediaStreamingPlatform_API.Infrastruct.Persistence
             return _MSPContext.MediaFiles.ToList();
         }
 
-        public MediaFile GetMediaFileById(int id)
+        public async Task<MediaFile> GetMediaFileById(int id)
         {
-            MediaFile? media = _MSPContext.MediaFiles.FirstOrDefault(m => m.Id == id);
+            MediaFile? media = await _MSPContext.MediaFiles.FirstOrDefaultAsync(m => m.Id == id);
             return media;
 
         }

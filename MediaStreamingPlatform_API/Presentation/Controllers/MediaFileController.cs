@@ -48,6 +48,18 @@ namespace MediaStreamingPlatform_API.Presentation.Controllers
                 return Ok(result);
 
         }
+        [HttpGet]
+        [Route("/GetFileContent{id}")]
+        public async Task<FileResult> GetFileConent([FromBody]int id)
+        {
+           var blob =  _mediaFileService.DeleteMediaFIleById(id);
+           if(blob != null)
+            {
+                return blob;
+            }
+
+        }
+
 
     }
 }

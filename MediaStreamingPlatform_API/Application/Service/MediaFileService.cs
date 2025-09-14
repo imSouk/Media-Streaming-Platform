@@ -43,6 +43,16 @@ namespace MediaStreamingPlatform_API.Application.UseCases
             return Task.FromResult(Dtos);
         }
 
+        public async Task<MediaFileBlobDto> GetMediaFileById(int id)
+        {
+            MediaFile file =  await _mediaFileRepository.GetMediaFileById(id);
+            MediaFileBlobDto blob = new MediaFileBlobDto();
+            blob.FileName = file.FileName;
+            blob.FileContent = file.FileContent;
+            blob.ContentType = file.ContentType;
+            return blob;
+        }
+
         public Task MapAndSaveMediaFile(IFormFile formFile, byte[] fileContent)
         {
            
