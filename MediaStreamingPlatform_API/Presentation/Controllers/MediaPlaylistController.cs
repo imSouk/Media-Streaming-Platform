@@ -1,4 +1,5 @@
-﻿using MediaStreamingPlatform_API.Domain.Entities;
+﻿using MediaStreamingPlatform_API.Application.DTOs;
+using MediaStreamingPlatform_API.Domain.Entities;
 using MediaStreamingPlatform_API.Domain.interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,7 +21,7 @@ namespace MediaStreamingPlatform_API.Presentation.Controllers
         {
             if(name != null) 
             {
-                MediaPlaylistDto mediaPlaylistDto = new MediaPlaylistDto();
+                MediaPlaylistCreateDto mediaPlaylistDto = new MediaPlaylistCreateDto();
                 mediaPlaylistDto.PlaylistName = name;
                 string result = await _mediaPlaylistService.CreateAndSavePlaylist(mediaPlaylistDto);
                 return Ok(result);
@@ -44,11 +45,22 @@ namespace MediaStreamingPlatform_API.Presentation.Controllers
 
         [HttpGet]
         [Route("/GetAllPlaylists")]
-        public async Task<List<MediaPlaylist>> GetAllPlaylists()
+        public async Task<List<MediaPlaylistDto>> GetAllPlaylists()
         {
+            
             var result = await _mediaPlaylistService.GetAllPlaylists();
             return result;            
         }
+
+        [HttpGet]
+        [Route("/GetPlaylistById")]
+        public async Task<MediaPlaylist> GetPlaylistById([FromQuery]int id)
+        {
+            var result = await _mediaPlaylistService.GetPlaylistByIdAsync(id);
+            return result;
+        }
+
+
 
     }
 }

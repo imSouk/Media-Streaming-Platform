@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MediaStreamingPlatform_API.Migrations
 {
     [DbContext(typeof(MSPContext))]
-    [Migration("20250915054650_PlaylistName Colum")]
-    partial class PlaylistNameColum
+    [Migration("20250915194106_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,7 +48,7 @@ namespace MediaStreamingPlatform_API.Migrations
                     b.Property<long>("FileSize")
                         .HasColumnType("bigint");
 
-                    b.Property<int?>("MediaPlaylistId")
+                    b.Property<int>("PlaylistId")
                         .HasColumnType("integer");
 
                     b.Property<int>("Type")
@@ -59,7 +59,7 @@ namespace MediaStreamingPlatform_API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MediaPlaylistId");
+                    b.HasIndex("PlaylistId");
 
                     b.ToTable("MediaFiles");
                 });
@@ -86,9 +86,13 @@ namespace MediaStreamingPlatform_API.Migrations
 
             modelBuilder.Entity("MediaFile", b =>
                 {
-                    b.HasOne("MediaStreamingPlatform_API.Domain.Entities.MediaPlaylist", null)
+                    b.HasOne("MediaStreamingPlatform_API.Domain.Entities.MediaPlaylist", "Playlist")
                         .WithMany("MediaFiles")
-                        .HasForeignKey("MediaPlaylistId");
+                        .HasForeignKey("PlaylistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Playlist");
                 });
 
             modelBuilder.Entity("MediaStreamingPlatform_API.Domain.Entities.MediaPlaylist", b =>

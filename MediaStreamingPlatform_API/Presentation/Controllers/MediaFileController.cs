@@ -15,14 +15,18 @@ namespace MediaStreamingPlatform_API.Presentation.Controllers
         }
         [HttpPost]
         [Route("/save")]
-        public async Task<IActionResult> SaveMediaFile(IFormFile file)
+        public async Task<IActionResult> SaveMediaFile(IFormFile file, [FromForm]string playlistId)
         {
             if (file != null && file?.Length > 0)
             {
+                if (!int.TryParse(playlistId, out int id))
+                {
+                    return BadRequest("Invalid playlist ID");
+                }
                 var ms = new MemoryStream();
                 await file.CopyToAsync(ms);
                 byte[] fileBytes = ms.ToArray();
-                await _mediaFileService.MapAndSaveMediaFile(file, fileBytes);
+                await _mediaFileService.MapAndSaveMediaFile(file, fileBytes, id);
                 Console.WriteLine(file.ContentType);
                 return Ok($"Created {file.FileName}, {file.ContentType}");
             }

@@ -16,7 +16,7 @@ export const useMediaFiles = () => {
         const files = await MediaUploadService.GetAllFiles();
         setMedias(files);
 
-        const ids = files.map(f => f.id);
+        const ids = files.map(x => x.id);
         const blobs = await MediaUploadService.GetFileContents(ids);
 
         const urls: Record<number, string> = {};

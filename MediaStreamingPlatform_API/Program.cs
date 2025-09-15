@@ -26,6 +26,7 @@ builder.WebHost.ConfigureKestrel(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IPlaylistFileService, PlaylistFileService>();
 builder.Services.AddScoped<IMediaPlaylistService, MediaPlaylistService>();
 builder.Services.AddScoped<IMediaPlaylistRepository, MediaPlaylistRepository>();
 builder.Services.AddScoped<IMediaFileService, MediaFileService>();

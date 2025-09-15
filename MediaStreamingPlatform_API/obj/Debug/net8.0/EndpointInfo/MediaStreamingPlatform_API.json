@@ -19,11 +19,17 @@
                   "file": {
                     "type": "string",
                     "format": "binary"
+                  },
+                  "playlistId": {
+                    "type": "string"
                   }
                 }
               },
               "encoding": {
                 "file": {
+                  "style": "form"
+                },
+                "playlistId": {
                   "style": "form"
                 }
               }
@@ -171,7 +177,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/MediaPlaylist"
+                    "$ref": "#/components/schemas/MediaPlaylistDto"
                   }
                 }
               },
@@ -179,7 +185,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/MediaPlaylist"
+                    "$ref": "#/components/schemas/MediaPlaylistDto"
                   }
                 }
               },
@@ -187,8 +193,47 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/MediaPlaylist"
+                    "$ref": "#/components/schemas/MediaPlaylistDto"
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetPlaylistById": {
+      "get": {
+        "tags": [
+          "MediaPlaylist"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaPlaylist"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaPlaylist"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaPlaylist"
                 }
               }
             }
@@ -229,6 +274,42 @@
           "uploadedAt": {
             "type": "string",
             "format": "date-time"
+          },
+          "playlistId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "playlist": {
+            "$ref": "#/components/schemas/MediaPlaylist"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MediaFileDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "contentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileSize": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "type": {
+            "$ref": "#/components/schemas/MediaType"
+          },
+          "uploadedAt": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false
@@ -248,6 +329,31 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MediaFile"
+            },
+            "nullable": true
+          },
+          "uploadedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MediaPlaylistDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "playlistName": {
+            "type": "string",
+            "nullable": true
+          },
+          "mediaFiles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MediaFileDto"
             },
             "nullable": true
           },

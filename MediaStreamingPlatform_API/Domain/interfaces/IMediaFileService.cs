@@ -4,7 +4,7 @@ namespace MediaStreamingPlatform_API.Domain.interfaces
 {
     public interface IMediaFileService
     {
-        public Task<string> MapAndSaveMediaFile(IFormFile formFile, byte[] fileContent);
+        public Task<string> MapAndSaveMediaFile(IFormFile formFile, byte[] fileContent, int playlistId);
         public Task<string> DeleteMediaFIleById(int id);
         public Task<List<MediaFileDto>> GetAllMediaFilesDtos();
         public Task<List<MediaFileBlobDto>> GetBlobById(int[] ids);

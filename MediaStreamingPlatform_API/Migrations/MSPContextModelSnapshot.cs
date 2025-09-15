@@ -3,7 +3,6 @@ using System;
 using MediaStreamingPlatform_API.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,11 +11,9 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MediaStreamingPlatform_API.Migrations
 {
     [DbContext(typeof(MSPContext))]
-    [Migration("20250914055642_Create New Table using Blob")]
-    partial class CreateNewTableusingBlob
+    partial class MSPContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,6 +45,9 @@ namespace MediaStreamingPlatform_API.Migrations
                     b.Property<long>("FileSize")
                         .HasColumnType("bigint");
 
+                    b.Property<int>("PlaylistId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("Type")
                         .HasColumnType("integer");
 
@@ -56,7 +56,45 @@ namespace MediaStreamingPlatform_API.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PlaylistId");
+
                     b.ToTable("MediaFiles");
+                });
+
+            modelBuilder.Entity("MediaStreamingPlatform_API.Domain.Entities.MediaPlaylist", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("PlaylistName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UploadedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Playlists");
+                });
+
+            modelBuilder.Entity("MediaFile", b =>
+                {
+                    b.HasOne("MediaStreamingPlatform_API.Domain.Entities.MediaPlaylist", "Playlist")
+                        .WithMany("MediaFiles")
+                        .HasForeignKey("PlaylistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Playlist");
+                });
+
+            modelBuilder.Entity("MediaStreamingPlatform_API.Domain.Entities.MediaPlaylist", b =>
+                {
+                    b.Navigation("MediaFiles");
                 });
 #pragma warning restore 612, 618
         }

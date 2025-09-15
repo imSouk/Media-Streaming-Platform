@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using MediaStreamingPlatform_API.Application.DTOs;
 
 namespace MediaStreamingPlatform_API.Domain.Entities
 {
@@ -9,7 +10,7 @@ namespace MediaStreamingPlatform_API.Domain.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string PlaylistName{ get; set; }
-        public List<MediaFile>? MediaFiles { get; set; }
+        public virtual ICollection<MediaFile> MediaFiles { get; set; } = new List<MediaFile>();
         public DateTime UploadedAt { get; set; } = DateTime.UtcNow;
     }
 }

@@ -1,4 +1,5 @@
-﻿using MediaStreamingPlatform_API.Domain.Entities;
+﻿using MediaStreamingPlatform_API.Application.DTOs;
+using MediaStreamingPlatform_API.Domain.Entities;
 using MediaStreamingPlatform_API.Domain.interfaces;
 
 namespace MediaStreamingPlatform_API.Application.Service
@@ -10,7 +11,7 @@ namespace MediaStreamingPlatform_API.Application.Service
         {
             _mediaPlaylistService = repository;
         }
-        public async Task<string> CreateAndSavePlaylist(MediaPlaylistDto playlistDto)
+        public async Task<string> CreateAndSavePlaylist(MediaPlaylistCreateDto playlistDto)
         {
             if (playlistDto != null)
             {
@@ -24,7 +25,7 @@ namespace MediaStreamingPlatform_API.Application.Service
         }
         public async Task<string> DeletePlaylist(int id)
         {
-                MediaPlaylist playlist = _mediaPlaylistService.GetPlaylistById(id);
+                MediaPlaylist playlist = await _mediaPlaylistService.GetPlaylistByIdAsync(id);
                 if (playlist != null)
                 {
                     _mediaPlaylistService.DeletePlaylist(playlist);
@@ -35,10 +36,16 @@ namespace MediaStreamingPlatform_API.Application.Service
            
         }
 
-        public async Task<List<MediaPlaylist>> GetAllPlaylists()
+        public async Task<List<MediaPlaylistDto>> GetAllPlaylists()
         {
-            List<MediaPlaylist> playlist = await _mediaPlaylistService.GetAllPlaylists();
+            List<MediaPlaylistDto> playlist = await _mediaPlaylistService.GetAllPlaylistsWithFiles();
             return playlist;
         }
+        public async Task<MediaPlaylist> GetPlaylistByIdAsync(int id)
+        {
+            MediaPlaylist playlist = await _mediaPlaylistService.GetPlaylistByIdAsync(id);
+            return playlist;
+        }
+        
     }
 }

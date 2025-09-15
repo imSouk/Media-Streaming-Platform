@@ -1,10 +1,10 @@
-import FileUploadComponent from "./components/FileUploadComponent"
+import Playlist from "./components/Playlist"
 
 function App() {
   return (
-    <FileUploadComponent>
-      
-    </FileUploadComponent>
+    <Playlist>
+
+      </Playlist>
   )
 }
 

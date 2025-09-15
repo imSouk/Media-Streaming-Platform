@@ -7,13 +7,14 @@ namespace MediaStreamingPlatform_API.Application.UseCases
     {
         private readonly IMediaFileRepository _mediaFileRepository;
         private readonly IMediaFileTypeValidator _mediaFileTypeValidator;
-        public MediaFileService(IMediaFileRepository mediaFileRepository, IMediaFileTypeValidator mediaFileTypeValidator)
+        private readonly IPlaylistFileService _playlistFileService;
+        public MediaFileService(IMediaFileRepository mediaFileRepository, IMediaFileTypeValidator mediaFileTypeValidator, IPlaylistFileService playlistFileService)
         {
             _mediaFileRepository = mediaFileRepository;
             _mediaFileTypeValidator = mediaFileTypeValidator;
-            
+            _playlistFileService = playlistFileService;
         }
-        public async Task<string> MapAndSaveMediaFile(IFormFile formFile, byte[] fileContent)
+        public async Task<string> MapAndSaveMediaFile(IFormFile formFile, byte[] fileContent, int playlistId)
         {
            
                 MediaFile file = new MediaFile();
@@ -25,7 +26,9 @@ namespace MediaStreamingPlatform_API.Application.UseCases
                 {
                     file.Type = _mediaFileTypeValidator.GetMediaType(formFile.ContentType);
                 }
+                
                 _mediaFileRepository.AddMediaFile(file);
+                await _playlistFileService.AddPlaylistFile(file, playlistId);
                 await _mediaFileRepository.SaveAsync();
             return $"File {file.FileName} save in db with ID = {file.Id}";
         }

@@ -1,4 +1,5 @@
-﻿using MediaStreamingPlatform_API.Domain.Entities;
+﻿using MediaStreamingPlatform_API.Application.DTOs;
+using MediaStreamingPlatform_API.Domain.Entities;
 
 namespace MediaStreamingPlatform_API.Domain.interfaces
 {
@@ -6,8 +7,8 @@ namespace MediaStreamingPlatform_API.Domain.interfaces
     {
         public void CreatePlaylist(MediaPlaylist playlist);
         public void DeletePlaylist(MediaPlaylist playlist);
-        public MediaPlaylist GetPlaylistById(int id);
-        public Task<List<MediaPlaylist>> GetAllPlaylists();
+        public Task<MediaPlaylist> GetPlaylistByIdAsync(int id);
+        public Task<List<MediaPlaylistDto>> GetAllPlaylistsWithFiles();
         public Task SaveAsync();
     }
 }
