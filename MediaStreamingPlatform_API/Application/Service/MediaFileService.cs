@@ -1,7 +1,5 @@
 ﻿using MediaStreamingPlatform_API.Application.DTOs;
 using MediaStreamingPlatform_API.Domain.interfaces;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using System.Reflection.Metadata;
 
 namespace MediaStreamingPlatform_API.Application.UseCases
 {
@@ -15,6 +13,22 @@ namespace MediaStreamingPlatform_API.Application.UseCases
             _mediaFileTypeValidator = mediaFileTypeValidator;
             
         }
+        public async Task<string> MapAndSaveMediaFile(IFormFile formFile, byte[] fileContent)
+        {
+           
+                MediaFile file = new MediaFile();
+                file.FileName = formFile.FileName;
+                file.FileContent = fileContent;
+                file.ContentType = formFile.ContentType;
+                file.FileSize = formFile.Length;
+                if (formFile.ContentType != null)
+                {
+                    file.Type = _mediaFileTypeValidator.GetMediaType(formFile.ContentType);
+                }
+                _mediaFileRepository.AddMediaFile(file);
+                await _mediaFileRepository.SaveAsync();
+            return $"File {file.FileName} save in db with ID = {file.Id}";
+        }
         public async Task<string> DeleteMediaFIleById(int id)
         {
            var media = await _mediaFileRepository.GetMediaFileById(id);
@@ -23,6 +37,7 @@ namespace MediaStreamingPlatform_API.Application.UseCases
                 return $"Media not found";
             }
             _mediaFileRepository.DeleteMediaFile(media);
+            await _mediaFileRepository.SaveAsync();
             string result = $"Delete Media {media.FileName} with ID = {id}";
             return result;
         }
@@ -58,30 +73,9 @@ namespace MediaStreamingPlatform_API.Application.UseCases
                 blob.ContentType = file.ContentType;
                 list.Add(blob);
             }
-            
             return list;
         }
 
-        public Task MapAndSaveMediaFile(IFormFile formFile, byte[] fileContent)
-        {
-            try
-            {
-                MediaFile file = new MediaFile();
-                file.FileName = formFile.FileName;
-                file.FileContent = fileContent;
-                file.ContentType = formFile.ContentType;
-                file.FileSize = formFile.Length;
-                if (formFile.ContentType != null)
-                {
-                    file.Type = _mediaFileTypeValidator.GetMediaType(formFile.ContentType);
-                }
-                 _mediaFileRepository.AddMediaFile(file);
-            }
-            catch (Exception e) 
-            {
-                return Task.FromResult(e);
-            }
-            return Task.CompletedTask;
-        }
+       
     }
 }

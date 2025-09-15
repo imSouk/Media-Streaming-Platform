@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class MediaFile
 {
     [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
     public string FileName { get; set; } = string.Empty;
     public byte[] FileContent { get; set; } = Array.Empty<byte>();

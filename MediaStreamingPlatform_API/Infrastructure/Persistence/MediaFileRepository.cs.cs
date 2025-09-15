@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
 
-namespace MediaStreamingPlatform_API.Infrastruct.Persistence
+namespace MediaStreamingPlatform_API.Infrastructure.Persistence
 {
     public class MediaFileRepository : IMediaFileRepository
     {
@@ -14,14 +14,12 @@ namespace MediaStreamingPlatform_API.Infrastruct.Persistence
         public string AddMediaFile(MediaFile mediaFile)
         {
             _MSPContext.MediaFiles.Add(mediaFile);
-            _MSPContext.SaveChanges();
             return "saved";
         }
 
         public string DeleteMediaFile(MediaFile mediaFile)
         {
             _MSPContext.MediaFiles.Remove(mediaFile);
-            _MSPContext.SaveChanges();
             return "deleted";
         }
 
@@ -30,6 +28,10 @@ namespace MediaStreamingPlatform_API.Infrastruct.Persistence
             return _MSPContext.MediaFiles.ToList();
         }
 
+        public async Task SaveAsync()
+        {
+            await _MSPContext.SaveChangesAsync();
+        }
         public async Task<MediaFile> GetMediaFileById(int id)
         {
             MediaFile? media = await _MSPContext.MediaFiles.FirstOrDefaultAsync(m => m.Id == id);

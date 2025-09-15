@@ -1,7 +1,8 @@
+using MediaStreamingPlatform_API.Application.Service;
 using MediaStreamingPlatform_API.Application.UseCases;
 using MediaStreamingPlatform_API.Domain.interfaces;
 using MediaStreamingPlatform_API.Domain.Specifications;
-using MediaStreamingPlatform_API.Infrastruct.Persistence;
+using MediaStreamingPlatform_API.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,6 +26,8 @@ builder.WebHost.ConfigureKestrel(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IMediaPlaylistService, MediaPlaylistService>();
+builder.Services.AddScoped<IMediaPlaylistRepository, MediaPlaylistRepository>();
 builder.Services.AddScoped<IMediaFileService, MediaFileService>();
 builder.Services.AddScoped<IMediaFileRepository, MediaFileRepository >();
 builder.Services.AddScoped<IMediaFileTypeValidator, MediaFileTypeValidator >();
