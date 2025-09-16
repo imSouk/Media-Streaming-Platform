@@ -26,14 +26,14 @@ export class MediaUploadService {
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(`Failed to get multiple file contents: ${response.status} - ${errorText}`);
+      throw new Error(`Failed to get file contents: ${response.status} - ${errorText}`);
     }
 
     return response.json();
   }
 
-  static async GetAllFiles(): Promise<MediaFile[]> {
-    const response = await fetch(`${this.API_URL}/GetAll`, {
+  static async GetPlaylistFiles(): Promise<MediaFile[]> {
+    const response = await fetch(`${this.API_URL}/GetPlaylistItemsById`, {
       method: "GET",
     });
 
@@ -41,5 +41,19 @@ export class MediaUploadService {
       throw new Error(`Failed to get all files: ${response.status}`);
     }
     return response.json();
+  }
+
+  static async GetPlaylistFilesById(playlistId: number): Promise<MediaFile[]> {
+    const response = await fetch(`${this.API_URL}/GetPlaylistItemsById?id=${playlistId}`, {
+      method: "GET",
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to get playlist files: ${response.status} - ${errorText}`);
+    }
+    
+    const playlist = await response.json();
+    return playlist.mediaFiles || [];
   }
 }

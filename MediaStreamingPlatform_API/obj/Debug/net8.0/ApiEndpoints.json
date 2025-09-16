@@ -1,24 +1,8 @@
 [
   {
-    "ContainingType": "MediaStreamingPlatform_API.Presentation.Controllers.MediaFileController",
-    "Method": "DeleteMediaFile",
-    "RelativePath": "{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "MediaStreamingPlatform_API.Presentation.Controllers.MediaPlaylistController",
     "Method": "CreatePlaylist",
-    "RelativePath": "Create",
+    "RelativePath": "CreatePlaylist",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -32,16 +16,37 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MediaStreamingPlatform_API.Presentation.Controllers.MediaPlaylistController",
-    "Method": "DeletePlaylist",
-    "RelativePath": "Delete",
-    "HttpMethod": "POST",
+    "ContainingType": "MediaStreamingPlatform_API.Presentation.Controllers.MediaFileController",
+    "Method": "DeleteMediaFile",
+    "RelativePath": "DeleteFile",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
+        "Name": "fileName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "playlistId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaStreamingPlatform_API.Presentation.Controllers.MediaPlaylistController",
+    "Method": "DeletePlaylist",
+    "RelativePath": "DeletePlaylist",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "playlistId",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],
@@ -80,7 +85,7 @@
   {
     "ContainingType": "MediaStreamingPlatform_API.Presentation.Controllers.MediaPlaylistController",
     "Method": "GetPlaylistById",
-    "RelativePath": "GetPlaylistById",
+    "RelativePath": "GetPlaylistItemsById",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -93,7 +98,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "MediaStreamingPlatform_API.Domain.Entities.MediaPlaylist",
+        "Type": "MediaStreamingPlatform_API.Application.DTOs.MediaPlaylistDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -132,6 +137,22 @@
         "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
       },
+      {
+        "Name": "playlistId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MediaStreamingPlatform_API.Presentation.Controllers.MediaPlaylistController",
+    "Method": "StartPlaylist",
+    "RelativePath": "StartPlaylist",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
         "Name": "playlistId",
         "Type": "System.String",

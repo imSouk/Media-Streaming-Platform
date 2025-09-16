@@ -26,6 +26,8 @@ builder.WebHost.ConfigureKestrel(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSignalR();
+builder.Services.AddScoped<SignalRService>();
 builder.Services.AddScoped<IPlaylistFileService, PlaylistFileService>();
 builder.Services.AddScoped<IMediaPlaylistService, MediaPlaylistService>();
 builder.Services.AddScoped<IMediaPlaylistRepository, MediaPlaylistRepository>();
@@ -42,21 +44,26 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins("http://localhost:5174", "http://localhost:5173")
             .AllowAnyMethod()
-            .AllowAnyHeader();
+            .AllowAnyHeader()
+            .AllowCredentials();
+            
     });
 });
 
 var app = builder.Build();
 
+app.UseCors("AllowAll");
+
+app.MapHub<MediaHub>("/mediaHub");
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseCors("AllowAll");
+
 
 app.UseHttpsRedirection();
 

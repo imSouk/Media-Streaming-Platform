@@ -38,5 +38,11 @@ namespace MediaStreamingPlatform_API.Infrastructure.Persistence
             return media;
 
         }
+
+        public async Task<MediaFile> GetMediaFileByName(string fileName)
+        {
+            MediaFile? media = await _MSPContext.MediaFiles.FirstOrDefaultAsync(m => m.FileName == fileName);
+            return media;
+        }
     }
 }

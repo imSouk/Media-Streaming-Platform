@@ -17,13 +17,16 @@ namespace MediaStreamingPlatform_API.Application.Service
         {
             var playlist = await _mediaPlaylistService.GetPlaylistByIdAsync(id);
             if (playlist == null)
-                throw new ArgumentException("Playlist not found");
+                throw new NullReferenceException("Playlist not found");
             file.PlaylistId = playlist.Id;
         }
 
-        public Task RemovePlaylistFile()
+        public async Task RemovePlaylistFile(MediaFile file, int id)
         {
-            throw new NotImplementedException();
+            var playlist = await _mediaPlaylistService.GetPlaylistByIdAsync(id);
+            if (playlist == null) 
+                throw new NullReferenceException("Playlist Not Found");
+            playlist.MediaFiles.Remove(file);
         }
 
         public Task UpdatePlaylistPositionFile()

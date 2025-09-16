@@ -34,12 +34,16 @@ namespace MediaStreamingPlatform_API.Presentation.Controllers
         }
 
         [HttpDelete]
-        [Route("/{id}")]
-        public async Task<IActionResult> DeleteMediaFile( int id)
+        [Route("/DeleteFile")]
+        public async Task<IActionResult> DeleteMediaFile([FromQuery] string fileName, string playlistId)
         {
-          if(id > 0)
+          if(fileName != null && playlistId !=null )
             {
-                var result = await _mediaFileService.DeleteMediaFIleById(id);
+                if (!int.TryParse(playlistId, out int id))
+                {
+                    return BadRequest("Invalid playlist ID");
+                }
+                var result = await _mediaFileService.DeleteMediaFIleByName(fileName, id);
                 return Ok(result);
                
             }

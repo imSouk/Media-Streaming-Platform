@@ -1,75 +1,46 @@
-import { Spin, Card, Button } from "antd"; // ADICIONAR Button
-import { PlusOutlined } from '@ant-design/icons'; // ADICIONAR ícone
-import { usePlaylists } from "../CustomHooks/Hooks";
-import UploadMediaFile from "./UploadMediaFile";
+import { useState } from 'react';
+import { Spin } from 'antd';
+import { usePlaylists } from '../CustomHooks/Hooks';
+import CreatePlaylistCard from './CreatePlaylistCard';
+import CreatePlaylistModal from './CreatePlaylistModal';
+import PlaylistCard from './PlaylistCard';
 
 export default function Playlist() {
-  const { playlists, loading } = usePlaylists();
-  
-  const handleCreatePlaylist = () => {
+  const { 
+    playlists, 
+    loading, 
+    addPlaylist,
+    removePlaylist,
+    addFileToPlaylist,
+    removeFileFromPlaylist
+  } = usePlaylists();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  };
+  if (loading) return <Spin size="large" />;
 
-  if (loading) {
-    return <Spin size="large" />;
-  }
-  
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "16px",
-        padding: "20px",
-      }}
-    >
-      <Card
-        style={{ 
-          width: 300, 
-          minHeight: 200, 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'center',
-          border: '2px dashed #d9d9d9'
-        }}
-      >
-        <Button 
-          type="dashed" 
-          icon={<PlusOutlined />} 
-          size="large"
-          onClick={handleCreatePlaylist}
-        >
-          Create Playlist
-        </Button>
-      </Card>
+    <div style={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: "16px",
+      padding: "20px"
+    }}>
+      <CreatePlaylistCard onCreateClick={() => setIsModalOpen(true)} />
+      
+      <CreatePlaylistModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onPlaylistCreated={addPlaylist}
+      />
 
       {playlists.map((playlist) => (
-        <Card
-          key={playlist.id}
-          title={`Playlist ${playlist.playlistName || playlist.id}`}
-          style={{ width: 300, minHeight: 200 }}
-        >
-          <div>
-            <strong>Files:</strong>
-            {playlist.mediaFiles && playlist.mediaFiles.length > 0 ? (
-              <ul>
-                {playlist.mediaFiles.map((file, index) => (
-                  <li key={index}>
-                    <div>
-                      <strong>Name:</strong> {file.fileName}
-                    </div>
-                    <div>
-                      <strong>Type:</strong> {file.contentType}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>No files in this playlist</p>
-            )}
-            <UploadMediaFile playlistId={playlist.id} />
-          </div>
-        </Card>
+        <PlaylistCard 
+          key={playlist.id} 
+          playlist={playlist} 
+          onDeleted={() => removePlaylist(playlist.id)}
+          onFileUploaded={(file) => addFileToPlaylist(playlist.id, file)}
+          onFileDeleted={(fileName) => removeFileFromPlaylist(playlist.id, fileName)}
+        />
       ))}
     </div>
   );

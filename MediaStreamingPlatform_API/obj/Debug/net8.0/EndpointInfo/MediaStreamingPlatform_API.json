@@ -43,19 +43,24 @@
         }
       }
     },
-    "/{id}": {
+    "/DeleteFile": {
       "delete": {
         "tags": [
           "MediaFile"
         ],
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
+            "name": "fileName",
+            "in": "query",
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
+            }
+          },
+          {
+            "name": "playlistId",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -121,7 +126,7 @@
         }
       }
     },
-    "/Create": {
+    "/CreatePlaylist": {
       "post": {
         "tags": [
           "MediaPlaylist"
@@ -142,18 +147,17 @@
         }
       }
     },
-    "/Delete": {
-      "post": {
+    "/DeletePlaylist": {
+      "delete": {
         "tags": [
           "MediaPlaylist"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "playlistId",
             "in": "query",
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],
@@ -202,7 +206,7 @@
         }
       }
     },
-    "/GetPlaylistById": {
+    "/GetPlaylistItemsById": {
       "get": {
         "tags": [
           "MediaPlaylist"
@@ -223,20 +227,41 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/MediaPlaylist"
+                  "$ref": "#/components/schemas/MediaPlaylistDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MediaPlaylist"
+                  "$ref": "#/components/schemas/MediaPlaylistDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MediaPlaylist"
+                  "$ref": "#/components/schemas/MediaPlaylistDto"
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/StartPlaylist": {
+      "post": {
+        "tags": [
+          "MediaPlaylist"
+        ],
+        "parameters": [
+          {
+            "name": "playlistId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -244,47 +269,6 @@
   },
   "components": {
     "schemas": {
-      "MediaFile": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "fileName": {
-            "type": "string",
-            "nullable": true
-          },
-          "fileContent": {
-            "type": "string",
-            "format": "byte",
-            "nullable": true
-          },
-          "contentType": {
-            "type": "string",
-            "nullable": true
-          },
-          "fileSize": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "type": {
-            "$ref": "#/components/schemas/MediaType"
-          },
-          "uploadedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "playlistId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "playlist": {
-            "$ref": "#/components/schemas/MediaPlaylist"
-          }
-        },
-        "additionalProperties": false
-      },
       "MediaFileDto": {
         "type": "object",
         "properties": {
@@ -306,31 +290,6 @@
           },
           "type": {
             "$ref": "#/components/schemas/MediaType"
-          },
-          "uploadedAt": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "additionalProperties": false
-      },
-      "MediaPlaylist": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "playlistName": {
-            "type": "string",
-            "nullable": true
-          },
-          "mediaFiles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MediaFile"
-            },
-            "nullable": true
           },
           "uploadedAt": {
             "type": "string",

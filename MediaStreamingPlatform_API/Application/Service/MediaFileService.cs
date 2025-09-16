@@ -79,6 +79,18 @@ namespace MediaStreamingPlatform_API.Application.UseCases
             return list;
         }
 
-       
+        public async Task<string> DeleteMediaFIleByName(string fileName, int playlistId)
+        {
+            var media = await _mediaFileRepository.GetMediaFileByName(fileName);
+            if (media == null)
+            {
+                return $"Media not found";
+            }
+            _mediaFileRepository.DeleteMediaFile(media);
+            await _playlistFileService.RemovePlaylistFile(media, playlistId);
+            await _mediaFileRepository.SaveAsync();
+            string result = $"Delete Media {media.FileName} with ID = {media.Id} int the playlist with id = {playlistId}";
+            return result;
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace MediaStreamingPlatform_API.Presentation.Controllers
         }
 
         [HttpPost]
-        [Route("/Create")]
+        [Route("/CreatePlaylist")]
         public async Task<IActionResult> CreatePlaylist([FromQuery]string name)
         {
             if(name != null) 
@@ -30,15 +30,18 @@ namespace MediaStreamingPlatform_API.Presentation.Controllers
             return Ok($"Cant Create playlist with name{name}");
         }
 
-        [HttpPost]
-        [Route("/Delete")]
-        public async Task<IActionResult> DeletePlaylist([FromQuery] int id)
+        [HttpDelete]
+        [Route("/DeletePlaylist")]
+        public async Task<IActionResult> DeletePlaylist([FromQuery] string playlistId)
         {
+            if (!int.TryParse(playlistId, out int id))
+            {
+                return BadRequest("Invalid playlist ID");
+            }
             if (id > 0 )
             {
                string result = await _mediaPlaylistService.DeletePlaylist(id);
                 return Ok(result);
-
             }
             return Ok($"Cant Delete the playlist with id -> {id}");
         }
@@ -53,14 +56,24 @@ namespace MediaStreamingPlatform_API.Presentation.Controllers
         }
 
         [HttpGet]
-        [Route("/GetPlaylistById")]
-        public async Task<MediaPlaylist> GetPlaylistById([FromQuery]int id)
+        [Route("/GetPlaylistItemsById")]
+        public async Task<MediaPlaylistDto> GetPlaylistById([FromQuery]int id)
         {
-            var result = await _mediaPlaylistService.GetPlaylistByIdAsync(id);
+            var result = await _mediaPlaylistService.GetPlaylistItemsByIdAsync(id);
             return result;
         }
 
-
+        [HttpPost]
+        [Route("/StartPlaylist")]
+        public async Task<IActionResult> StartPlaylist([FromQuery] string playlistId)
+        {
+            if (!int.TryParse(playlistId, out int id))
+            {
+                return BadRequest("Invalid playlist ID");
+            }
+            var result = await _mediaPlaylistService.SendPlayCommand(id);
+            return Ok(result);
+        }
 
     }
 }

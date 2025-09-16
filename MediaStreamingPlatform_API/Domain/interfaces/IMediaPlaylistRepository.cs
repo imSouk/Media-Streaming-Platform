@@ -8,7 +8,9 @@ namespace MediaStreamingPlatform_API.Domain.interfaces
         public void CreatePlaylist(MediaPlaylist playlist);
         public void DeletePlaylist(MediaPlaylist playlist);
         public Task<MediaPlaylist> GetPlaylistByIdAsync(int id);
+        public Task<MediaPlaylistDto> GetPlaylistItems(int id);
         public Task<List<MediaPlaylistDto>> GetAllPlaylistsWithFiles();
+
         public Task SaveAsync();
     }
 }

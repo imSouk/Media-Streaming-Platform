@@ -41,6 +41,25 @@ namespace MediaStreamingPlatform_API.Infrastructure.Persistence
                 })
                 .ToListAsync();
         }
+        public async Task<MediaPlaylistDto> GetPlaylistItems(int id)
+        {
+            MediaPlaylistDto? playlist =  await _MSPContext.Playlists.Where(p => p.Id == id).Select(p => new MediaPlaylistDto
+            {
+                Id = p.Id,
+                PlaylistName = p.PlaylistName,
+                UploadedAt = p.UploadedAt,
+                MediaFiles = p.MediaFiles.Select(m => new MediaFileDto
+                {
+                    Id = m.Id,
+                    FileName = m.FileName,
+                    ContentType = m.ContentType,
+                    FileSize = m.FileSize,
+                    Type = m.Type
+
+                }).ToList()
+            }).FirstOrDefaultAsync();
+            return playlist;
+        }
 
         public async Task SaveAsync() => await _MSPContext.SaveChangesAsync();
     }

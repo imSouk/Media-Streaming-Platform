@@ -1,15 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { message } from 'antd';
 import MediaService from '../functions';
-import Playlist from '../components/Playlist';
 
-interface MediaFile {
+export interface MediaFile {
   fileName: string;
   contentType: string;
 }
 
-interface Playlist {
-  id: number;
+export interface Playlist {
+  id: string;
   playlistName?: string;
   mediaFiles?: MediaFile[];
 }
@@ -17,19 +16,17 @@ interface Playlist {
 export function useFileUpload() {
   const [isUploading, setIsUploading] = useState(false);
   
-  const uploadFile = async (file: File, playlistId: number) => { 
+  const uploadFile = useCallback(async (file: File, playlistId: string) => { 
     setIsUploading(true);
-    try {
-      const result = await MediaService.uploadFile(file, playlistId);
-      message.success(`${file.name} uploaded successfully`);
-      return result;
-    } catch (error) {
-      message.error(`${file.name} upload failed`);
-      throw error;
-    } finally {
-      setIsUploading(false);
-    }
-  };
+    
+    const result = await MediaService.uploadFile(file, playlistId);
+    setIsUploading(false);
+    
+    const success = !!result;
+    message[success ? 'success' : 'error'](`${file.name} ${success ? 'uploaded successfully' : 'upload failed'}`);
+    
+    return result;
+  }, []);
 
   return { uploadFile, isUploading };
 }
@@ -38,20 +35,53 @@ export function usePlaylists() {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchPlaylists = async () => {
+  const fetchPlaylists = useCallback(async () => {
     setLoading(true);
-    try {
-      const result: Playlist[] = await MediaService.getPlaylists();
-      setPlaylists(result);
-    } catch (error) {
-      message.error("Failed to load playlists");
-    } finally {
-      setLoading(false);
-    }
-  };
+    const result = await MediaService.getPlaylists();
+    
+    setPlaylists(result || []);
+    setLoading(false);
+    
+    if (!result) message.error("Failed to load playlists");
+  }, []);
+
+  const updatePlaylist = useCallback((playlistId: string, updater: (playlist: Playlist) => Playlist) => {
+    setPlaylists(prev => prev.map(p => p.id === playlistId ? updater(p) : p));
+  }, []);
+
+  const addPlaylist = useCallback((newPlaylist: Playlist) => {
+    setPlaylists(prev => [...prev, newPlaylist]);
+  }, []);
+
+  const removePlaylist = useCallback((playlistId: string) => {
+    setPlaylists(prev => prev.filter(p => p.id !== playlistId));
+  }, []);
+
+  const addFileToPlaylist = useCallback((playlistId: string, newFile: MediaFile) => {
+    updatePlaylist(playlistId, playlist => ({
+      ...playlist,
+      mediaFiles: [...(playlist.mediaFiles || []), newFile]
+    }));
+  }, [updatePlaylist]);
+
+  const removeFileFromPlaylist = useCallback((playlistId: string, fileName: string) => {
+    updatePlaylist(playlistId, playlist => ({
+      ...playlist,
+      mediaFiles: playlist.mediaFiles?.filter(f => f.fileName !== fileName)
+    }));
+  }, [updatePlaylist]);
 
   useEffect(() => {
     fetchPlaylists();
-  }, []);
-  return { playlists, loading, fetchPlaylists };
+  }, [fetchPlaylists]);
+
+  return { 
+    playlists, 
+    loading, 
+    fetchPlaylists,
+    addPlaylist,
+    removePlaylist,
+    addFileToPlaylist,
+    removeFileFromPlaylist
+  };
 }
