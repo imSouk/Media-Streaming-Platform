@@ -17,7 +17,7 @@
 ## Tecnologias Utilizadas
 
 ### Frontend
-- **React 18** com TypeScript
+- **React ** com TypeScript
 - **Vite** (versão mais recente)
 - **Ant Design** - Componentes UI
 - **Tailwind CSS** - Estilização
