@@ -28,9 +28,6 @@
 - **SignalR** - WebSockets
 - **PostgreSQL** - Banco de dados
 
-### Arquitetura
-- **Clean Architecture** com separação de responsabilidades
-
 ## requisitos para rodar localmente
 
 - Node.js 18+
