@@ -19,10 +19,9 @@
 ### Frontend
 - **React ** com TypeScript
 - **Vite** (versão mais recente)
-- **Ant Design** - Componentes UI
-- **Tailwind CSS** - Estilização
-- **SignalR Client** - Comunicação em tempo real
-
+- **Ant Design** 
+- **Tailwind CSS** 
+- **SignalR Client**
 ### Backend
 - **.NET 8** - API REST
 - **Entity Framework Core** - ORM
