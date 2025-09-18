@@ -1,5 +1,5 @@
 import type { MediaFile } from '../CustomHooks/Hooks';
-import MediaFileItem from './MediaFileItens';
+import MediaFileItem from './MediaFileItem';
 
 interface PlaylistFilesProps {
   files?: MediaFile[];

@@ -112,7 +112,6 @@ C:\Users\pedro\Desktop\desafio_tecnico\Media-Streaming-Platform\MediaStreamingPl
 C:\Users\pedro\Desktop\desafio_tecnico\Media-Streaming-Platform\MediaStreamingPlatform_API\obj\Debug\net8.0\MediaStreamingPlatform_API.pdb
 C:\Users\pedro\Desktop\desafio_tecnico\Media-Streaming-Platform\MediaStreamingPlatform_API\obj\Debug\net8.0\MediaStreamingPlatform_API.genruntimeconfig.cache
 C:\Users\pedro\Desktop\desafio_tecnico\Media-Streaming-Platform\MediaStreamingPlatform_API\obj\Debug\net8.0\ref\MediaStreamingPlatform_API.dll
-C:\Users\pedro\Desktop\desafio_tecnico\Media-Streaming-Platform\MediaStreamingPlatform_API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\pedro\Desktop\desafio_tecnico\Media-Streaming-Platform\MediaStreamingPlatform_API\bin\Debug\net8.0\Microsoft.AspNetCore.Connections.Abstractions.dll
 C:\Users\pedro\Desktop\desafio_tecnico\Media-Streaming-Platform\MediaStreamingPlatform_API\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Client.dll
 C:\Users\pedro\Desktop\desafio_tecnico\Media-Streaming-Platform\MediaStreamingPlatform_API\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Common.dll
