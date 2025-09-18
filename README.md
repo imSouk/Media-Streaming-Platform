@@ -86,24 +86,24 @@ Player disponível em: `http://localhost:5174`
 
 ## O que foi concluído da Fase 4 :
 
-Atualização automática de playlists
-Transições simples entre mídias
+Atualização automática de playlists <br>
+Transições simples entre mídias <br>
 WebSocket para sincronização em tempo real
 
 ## O que faria com mais tempo disponível
 
 Funcionalidades Pendentes do Desafio:
-Autenticação JWT básica
+Autenticação JWT básica<br>
 Testes automatizados 
 
 ## Escalabilidade e Arquitetura
 
-Separar SignalR em worker dedicado para WebSockets
-Implementar sistema de filas (Kafka/RabbitMQ)
-Microserviços para diferentes responsabilidades
+Separar SignalR em worker dedicado para WebSockets <br>
+Implementar sistema de filas (Kafka/RabbitMQ)<br>
+Microserviços para diferentes responsabilidades<br>
 Suporte a múltiplos outputs simultâneos
 
 ## Performance e Infraestrutura
 
-Migrar armazenamento de BLOBs para AWS S3/Azure Blob Storage
+Migrar armazenamento de BLOBs para AWS S3/Azure Blob Storage<br>
 Cache distribuído para arquivos de mídia
