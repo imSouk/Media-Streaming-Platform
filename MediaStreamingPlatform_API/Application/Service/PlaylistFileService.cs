@@ -1,7 +1,5 @@
-﻿using MediaStreamingPlatform_API.Application.DTOs;
-using MediaStreamingPlatform_API.Domain.Entities;
-using MediaStreamingPlatform_API.Domain.interfaces;
-using Microsoft.EntityFrameworkCore;
+﻿using MediaStreamingPlatform_API.Domain.interfaces;
+
 
 namespace MediaStreamingPlatform_API.Application.Service
 {
@@ -13,22 +11,21 @@ namespace MediaStreamingPlatform_API.Application.Service
         {
             _mediaPlaylistService = mediaPlaylistService;
         }
-        public async Task AddPlaylistFile(MediaFile file, int id)
+        public async Task AddPlaylistFile(MediaFile file, int playlistId)
         {
-            var playlist = await _mediaPlaylistService.GetPlaylistByIdAsync(id);
+            var playlist = await _mediaPlaylistService.GetPlaylistByIdAsync(playlistId);
             if (playlist == null)
-                throw new NullReferenceException("Playlist not found");
+                throw new ArgumentException($"Playlist with ID {playlistId} not found");
             file.PlaylistId = playlist.Id;
         }
 
-        public async Task RemovePlaylistFile(MediaFile file, int id)
+        public async Task RemovePlaylistFile(MediaFile file, int playlistId)
         {
-            var playlist = await _mediaPlaylistService.GetPlaylistByIdAsync(id);
-            if (playlist == null) 
-                throw new NullReferenceException("Playlist Not Found");
-            playlist.MediaFiles.Remove(file);
+            var playlist = await _mediaPlaylistService.GetPlaylistByIdAsync(playlistId);
+            if (playlist == null)
+                throw new ArgumentException($"Playlist with ID {playlistId} not found");
+            playlist.MediaFiles?.Remove(file);
         }
-
         public Task UpdatePlaylistPositionFile()
         {
             throw new NotImplementedException();

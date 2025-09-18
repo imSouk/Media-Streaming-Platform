@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MediaStreamingPlatform_API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5be36d7133d932a9027b7a1d28902888edd108af")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a4a1df9c7f0bf27e56c143a1913d37f98cc0c48c")]
 [assembly: System.Reflection.AssemblyProductAttribute("MediaStreamingPlatform_API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MediaStreamingPlatform_API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

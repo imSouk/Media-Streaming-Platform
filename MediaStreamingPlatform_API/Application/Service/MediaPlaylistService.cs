@@ -1,8 +1,7 @@
 ﻿using MediaStreamingPlatform_API.Application.DTOs;
 using MediaStreamingPlatform_API.Domain.Entities;
 using MediaStreamingPlatform_API.Domain.interfaces;
-using Microsoft.EntityFrameworkCore.Storage.Json;
-using System.Runtime.InteropServices.Marshalling;
+
 
 namespace MediaStreamingPlatform_API.Application.Service
 {
@@ -17,37 +16,34 @@ namespace MediaStreamingPlatform_API.Application.Service
         }
         public async Task<string> CreateAndSavePlaylist(MediaPlaylistCreateDto playlistDto)
         {
-            if (playlistDto != null)
+            if (playlistDto == null)
+                return "Cannot create playlist, check all of the needed parameters";
+            var playlist = new MediaPlaylist
             {
-                MediaPlaylist playlist = new MediaPlaylist();
-                playlist.PlaylistName = playlistDto.PlaylistName;
-                _mediaPlaylistRepository.CreatePlaylist(playlist);
-                await _mediaPlaylistRepository.SaveAsync();
-                return $"Playlist created {playlist.PlaylistName}";
-            }
-            return $"Cant create ur playlist, check all of the needed parameters";
+                PlaylistName = playlistDto.PlaylistName
+            };
+            _mediaPlaylistRepository.CreatePlaylist(playlist);
+            await _mediaPlaylistRepository.SaveAsync();
+            return $"Playlist created {playlist.PlaylistName}";
         }
         public async Task<string> DeletePlaylist(int id)
         {
-                MediaPlaylist playlist = await _mediaPlaylistRepository.GetPlaylistByIdAsync(id);
-                if (playlist != null)
-                {
-                    _mediaPlaylistRepository.DeletePlaylist(playlist);
-                    await _mediaPlaylistRepository.SaveAsync();
-                    return $"Playlist delete {playlist.Id} {playlist.PlaylistName}";
-                }
+            var playlist = await _mediaPlaylistRepository.GetPlaylistByIdAsync(id);
+            if (playlist == null)
                 return $"Playlist with id {id} not found";
-           
+
+            _mediaPlaylistRepository.DeletePlaylist(playlist);
+            await _mediaPlaylistRepository.SaveAsync();
+            return $"Playlist deleted {playlist.Id} {playlist.PlaylistName}";
+
         }
         public async Task<MediaPlaylistDto> GetPlaylistItemsByIdAsync(int id)
         {
-            MediaPlaylistDto playlistDto = await _mediaPlaylistRepository.GetPlaylistItems(id);
-            return playlistDto;  
+            return await _mediaPlaylistRepository.GetPlaylistItems(id);
         }
         public async Task<List<MediaPlaylistDto>> GetAllPlaylists()
         {
-            List<MediaPlaylistDto> playlist = await _mediaPlaylistRepository.GetAllPlaylistsWithFiles();
-            return playlist;
+            return await _mediaPlaylistRepository.GetAllPlaylistsWithFiles();
         }
         public async Task<string> SendPlayCommand(int id)
         {

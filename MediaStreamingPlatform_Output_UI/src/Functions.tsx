@@ -18,7 +18,7 @@ export class MediaUploadService {
   private static readonly API_URL = "http://localhost:5278";
 
   static async GetFileContents(ids: number[]): Promise<Blob[]> {
-    const response = await fetch(`${this.API_URL}/MediaFile/GetFileContent`, {
+    const response = await fetch(`${this.API_URL}/api/MediaFile/content`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(ids),
@@ -33,7 +33,7 @@ export class MediaUploadService {
   }
 
   static async GetPlaylistFiles(): Promise<MediaFile[]> {
-    const response = await fetch(`${this.API_URL}/GetPlaylistItemsById`, {
+    const response = await fetch(`${this.API_URL}/api/MediaFile`, {
       method: "GET",
     });
 
@@ -44,7 +44,7 @@ export class MediaUploadService {
   }
 
   static async GetPlaylistFilesById(playlistId: number): Promise<MediaFile[]> {
-    const response = await fetch(`${this.API_URL}/GetPlaylistItemsById?id=${playlistId}`, {
+    const response = await fetch(`${this.API_URL}/ById?id=${playlistId}`, {
       method: "GET",
     });
 

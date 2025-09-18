@@ -15,27 +15,27 @@ export default class MediaService {
   static uploadFile = async (file: File, playlistId: string) => { 
     const formData = new FormData();  
     formData.append('file', file);  
-    formData.append('playlistId', playlistId);
+    formData.append('playlistId', playlistId.toString());
     
-    return this.simpleRequest('/save', { method: 'POST', body: formData });  
+    return this.simpleRequest('/api/MediaFile/save', { method: 'POST', body: formData });  
   };
 
-  static getPlaylists = () => this.request('/GetAllPlaylists');
+  static getPlaylists = () => this.request('/api/MediaPlaylist');
 
   static createPlaylist = (playlistName: string) => 
-    this.simpleRequest(`/CreatePlaylist?name=${encodeURIComponent(playlistName)}`, { method: 'POST' });
+    this.simpleRequest(`/api/MediaPlaylist?name=${encodeURIComponent(playlistName)}`, { method: 'POST' });
 
   static deletePlaylist = (playlistId: string) => 
-    this.simpleRequest(`/DeletePlaylist?playlistId=${playlistId}`, { method: 'DELETE' });
+    this.simpleRequest(`/api/MediaPlaylist?playlistId=${playlistId}`, { method: 'DELETE' });
 
   static deleteMediaFile = (fileName: string, playlistId: string) => 
-    this.simpleRequest(`/DeleteFile?fileName=${encodeURIComponent(fileName)}&playlistId=${playlistId}`, { method: 'DELETE' });
+    this.simpleRequest(`/api/MediaFile/file?fileName=${encodeURIComponent(fileName)}&playlistId=${playlistId}`, { method: 'DELETE' });
 
   static playPlaylist = (playlistId: string) => 
     this.simpleRequest(`/api/MediaPlaylist/play/${playlistId}`, { method: 'POST' });
 
   static async startPlaylist(playlistId: string): Promise<boolean> {  
-    const response = await fetch(`${this.API_URL}/StartPlaylist?playlistId=${playlistId}`, {  
+    const response = await fetch(`${this.API_URL}/start?playlistId=${playlistId}`, {  
       method: "POST",  
     });  
     return response.ok;  

@@ -1,48 +1,33 @@
 ﻿using MediaStreamingPlatform_API.Domain.interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.CodeAnalysis;
 
 namespace MediaStreamingPlatform_API.Infrastructure.Persistence
 {
     public class MediaFileRepository : IMediaFileRepository
     {
-        private readonly MSPContext _MSPContext;
+        private readonly MSPContext _context;
+
         public MediaFileRepository(MSPContext mspContext)
         {
-            _MSPContext = mspContext;
+            _context = mspContext;
         }
-        public string AddMediaFile(MediaFile mediaFile)
+        public void AddMediaFile(MediaFile mediaFile) => _context.MediaFiles.Add(mediaFile);
+        public void DeleteMediaFile(MediaFile mediaFile) => _context.MediaFiles.Remove(mediaFile);
+
+        public async Task<List<MediaFile>> GetAllMediaFiles()
         {
-            _MSPContext.MediaFiles.Add(mediaFile);
-            return "saved";
+            return await _context.MediaFiles.ToListAsync();
+        }
+        public async Task SaveAsync() => await _context.SaveChangesAsync();
+        public async Task<MediaFile?> GetMediaFileById(int id)
+        {
+            return await _context.MediaFiles.FirstOrDefaultAsync(m => m.Id == id);
         }
 
-        public string DeleteMediaFile(MediaFile mediaFile)
+        public async Task<MediaFile?> GetMediaFileByName(string fileName)
         {
-            _MSPContext.MediaFiles.Remove(mediaFile);
-            return "deleted";
-        }
-
-        public List<MediaFile> GetAllMediaFiles()
-        {
-            return _MSPContext.MediaFiles.ToList();
-        }
-
-        public async Task SaveAsync()
-        {
-            await _MSPContext.SaveChangesAsync();
-        }
-        public async Task<MediaFile> GetMediaFileById(int id)
-        {
-            MediaFile? media = await _MSPContext.MediaFiles.FirstOrDefaultAsync(m => m.Id == id);
-            return media;
-
-        }
-
-        public async Task<MediaFile> GetMediaFileByName(string fileName)
-        {
-            MediaFile? media = await _MSPContext.MediaFiles.FirstOrDefaultAsync(m => m.FileName == fileName);
-            return media;
+            return await _context.MediaFiles.FirstOrDefaultAsync(m => m.FileName == fileName);
+             
         }
     }
 }

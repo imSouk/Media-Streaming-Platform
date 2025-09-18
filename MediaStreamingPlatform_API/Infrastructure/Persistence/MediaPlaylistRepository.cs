@@ -8,22 +8,21 @@ namespace MediaStreamingPlatform_API.Infrastructure.Persistence
 {
     public class MediaPlaylistRepository : IMediaPlaylistRepository
     {
-        private readonly MSPContext _MSPContext;
+        private readonly MSPContext _context;
         public MediaPlaylistRepository(MSPContext mspContext)
         {
-            _MSPContext = mspContext;
+            _context = mspContext;
         }
 
-        public void CreatePlaylist(MediaPlaylist playlist) => _MSPContext.Playlists.Add(playlist);
+        public void CreatePlaylist(MediaPlaylist playlist) => _context.Playlists.Add(playlist);
 
-        public void DeletePlaylist(MediaPlaylist playlist) => _MSPContext?.Playlists.Remove(playlist);
-        public async Task UpdatePlaylistAsync(MediaPlaylist playlist) => _MSPContext?.Playlists.Update(playlist);
+        public void DeletePlaylist(MediaPlaylist playlist) => _context.Playlists.Remove(playlist);
 
-        public async Task<MediaPlaylist> GetPlaylistByIdAsync(int id) => await _MSPContext.Playlists.FirstOrDefaultAsync(e => e.Id == id);
+        public async Task<MediaPlaylist?> GetPlaylistByIdAsync(int id) => await _context.Playlists.FirstOrDefaultAsync(e => e.Id == id);
 
         public async Task<List<MediaPlaylistDto>> GetAllPlaylistsWithFiles()
         {
-            return await _MSPContext.Playlists
+            return await _context.Playlists
                 .Select(p => new MediaPlaylistDto
                 {
                     Id = p.Id,
@@ -41,9 +40,9 @@ namespace MediaStreamingPlatform_API.Infrastructure.Persistence
                 })
                 .ToListAsync();
         }
-        public async Task<MediaPlaylistDto> GetPlaylistItems(int id)
+        public async Task<MediaPlaylistDto?> GetPlaylistItems(int id)
         {
-            MediaPlaylistDto? playlist =  await _MSPContext.Playlists.Where(p => p.Id == id).Select(p => new MediaPlaylistDto
+            return await _context.Playlists.Where(p => p.Id == id).Select(p => new MediaPlaylistDto
             {
                 Id = p.Id,
                 PlaylistName = p.PlaylistName,
@@ -58,9 +57,9 @@ namespace MediaStreamingPlatform_API.Infrastructure.Persistence
 
                 }).ToList()
             }).FirstOrDefaultAsync();
-            return playlist;
+
         }
 
-        public async Task SaveAsync() => await _MSPContext.SaveChangesAsync();
+        public async Task SaveAsync() => await _context.SaveChangesAsync();
     }
 }

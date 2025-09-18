@@ -8,25 +8,27 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var fileUploadConfig = builder.Configuration.GetSection("FileUpload");
 builder.Services.Configure<FormOptions>(options =>
 {
-    options.MultipartBodyLengthLimit = 500 * 1024 * 1024; // 500MB
-    options.ValueLengthLimit = int.MaxValue;
+    options.MultipartBodyLengthLimit = fileUploadConfig.GetValue<long>("MaxFileSizeBytes");
+    options.ValueLengthLimit = fileUploadConfig.GetValue<int>("ValueLengthLimit");
     options.MultipartHeadersLengthLimit = int.MaxValue;
-    options.BufferBody = false; // Para arquivos grandes
+    options.BufferBody = fileUploadConfig.GetValue<bool>("BufferBody");
 });
 
 builder.WebHost.ConfigureKestrel(options =>
 {
-    options.Limits.MaxRequestBodySize = 500 * 1024 * 1024; // 500MB
-    options.Limits.RequestHeadersTimeout = TimeSpan.FromMinutes(10);
-    options.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(10);
+    options.Limits.MaxRequestBodySize = fileUploadConfig.GetValue<long>("MaxRequestBodySizeBytes");
+    options.Limits.RequestHeadersTimeout = TimeSpan.FromMinutes(fileUploadConfig.GetValue<int>("RequestTimeoutMinutes"));
+    options.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(fileUploadConfig.GetValue<int>("KeepAliveTimeoutMinutes"));
 });
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSignalR();
+
 builder.Services.AddScoped<SignalRService>();
 builder.Services.AddScoped<IPlaylistFileService, PlaylistFileService>();
 builder.Services.AddScoped<IMediaPlaylistService, MediaPlaylistService>();
@@ -34,21 +36,25 @@ builder.Services.AddScoped<IMediaPlaylistRepository, MediaPlaylistRepository>();
 builder.Services.AddScoped<IMediaFileService, MediaFileService>();
 builder.Services.AddScoped<IMediaFileRepository, MediaFileRepository >();
 builder.Services.AddScoped<IMediaFileTypeValidator, MediaFileTypeValidator >();
-builder.Services.AddScoped<MSPContext>();
+
 string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<MSPContext>(options => {
     options.UseNpgsql(connectionString);
 });
 
+var corsConfig = builder.Configuration.GetSection("Cors");
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.WithOrigins("http://localhost:5174", "http://localhost:5173")
+        policy.WithOrigins(corsConfig.GetSection("AllowedOrigins").Get<string[]>())
             .AllowAnyMethod()
-            .AllowAnyHeader()
-            .AllowCredentials();
-            
+            .AllowAnyHeader();
+
+        if (corsConfig.GetValue<bool>("AllowCredentials"))
+        {
+            policy.AllowCredentials();
+        }
     });
 });
 
@@ -56,7 +62,8 @@ var app = builder.Build();
 
 app.UseCors("AllowAll");
 
-app.MapHub<MediaHub>("/mediaHub");
+var signalRConfig = builder.Configuration.GetSection("SignalR");
+app.MapHub<MediaHub>(signalRConfig.GetValue<string>("HubPath"));
 
 if (app.Environment.IsDevelopment())
 {

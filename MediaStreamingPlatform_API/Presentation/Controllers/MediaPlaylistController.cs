@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MediaStreamingPlatform_API.Presentation.Controllers
 {
     [ApiController]
-    [Route("Playlist")]
+    [Route("api/[controller]")]
     public class MediaPlaylistController : ControllerBase
     {
         private readonly IMediaPlaylistService _mediaPlaylistService;
@@ -16,38 +16,31 @@ namespace MediaStreamingPlatform_API.Presentation.Controllers
         }
 
         [HttpPost]
-        [Route("/CreatePlaylist")]
         public async Task<IActionResult> CreatePlaylist([FromQuery]string name)
         {
-            if(name != null) 
-            {
-                MediaPlaylistCreateDto mediaPlaylistDto = new MediaPlaylistCreateDto();
-                mediaPlaylistDto.PlaylistName = name;
-                string result = await _mediaPlaylistService.CreateAndSavePlaylist(mediaPlaylistDto);
-                return Ok(result);
-                
-            }
-            return Ok($"Cant Create playlist with name{name}");
+            if (string.IsNullOrWhiteSpace(name))
+                return BadRequest("Playlist name is required");
+
+                var mediaPlaylistDto = new MediaPlaylistCreateDto
+                {
+                    PlaylistName = name
+                };
+            string result = await _mediaPlaylistService.CreateAndSavePlaylist(mediaPlaylistDto);
+            return Ok(result);
         }
 
         [HttpDelete]
-        [Route("/DeletePlaylist")]
         public async Task<IActionResult> DeletePlaylist([FromQuery] string playlistId)
         {
-            if (!int.TryParse(playlistId, out int id))
-            {
-                return BadRequest("Invalid playlist ID");
-            }
-            if (id > 0 )
-            {
-               string result = await _mediaPlaylistService.DeletePlaylist(id);
-                return Ok(result);
-            }
-            return Ok($"Cant Delete the playlist with id -> {id}");
+            int.TryParse(playlistId, out int id);
+            if (id <= 0)
+                return BadRequest("Invalid playlist ID");            
+
+            string result = await _mediaPlaylistService.DeletePlaylist(id);
+            return Ok(result);
         }
 
         [HttpGet]
-        [Route("/GetAllPlaylists")]
         public async Task<List<MediaPlaylistDto>> GetAllPlaylists()
         {
             
@@ -56,21 +49,24 @@ namespace MediaStreamingPlatform_API.Presentation.Controllers
         }
 
         [HttpGet]
-        [Route("/GetPlaylistItemsById")]
-        public async Task<MediaPlaylistDto> GetPlaylistById([FromQuery]int id)
+        [Route("/ById")]
+        public async Task<ActionResult<MediaPlaylistDto>> GetPlaylistById([FromQuery]int id)
         {
+            if (id <= 0)
+                return BadRequest("Invalid playlist ID");
             var result = await _mediaPlaylistService.GetPlaylistItemsByIdAsync(id);
-            return result;
+            if (result == null)
+                return NotFound($"Playlist with ID {id} not found");
+            return Ok(result);
         }
 
         [HttpPost]
-        [Route("/StartPlaylist")]
+        [Route("/start")]
         public async Task<IActionResult> StartPlaylist([FromQuery] string playlistId)
         {
-            if (!int.TryParse(playlistId, out int id))
-            {
-                return BadRequest("Invalid playlist ID");
-            }
+            int.TryParse(playlistId, out int id);
+            if (id <= 0)
+                return BadRequest("Invalid playlist ID");            
             var result = await _mediaPlaylistService.SendPlayCommand(id);
             return Ok(result);
         }
