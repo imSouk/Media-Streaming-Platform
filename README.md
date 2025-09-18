@@ -1,18 +1,4 @@
-# Media Streaming Platform
-
-## Funcionalidades
-### Dashboard (Input)
-- Criação e exclusão de playlists
-- Upload de arquivos de mídia (MP4, JPEG, PNG)
-- Adição e remoção de arquivos nas playlists
-- Controle de reprodução via SignalR
-- Limite de arquivo de 500MB
-
-### Player (Output)
-- Reprodução automática da playlist selecionada
-- Atualização em tempo real via WebSocket
-- Transições simples entre mídias
-- Sincronização automática com o dashboard
+# Desafio Técnico – Sistema de Player de Mídias
 
 ## Tecnologias Utilizadas
 
