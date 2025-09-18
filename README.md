@@ -99,36 +99,19 @@ Player disponível em: `http://localhost:5174`
 
 ## Status do Projeto
 
-## Fases Concluídas (1-4)
-## Fase 1 - Gerenciamento de Playlists
+## Fases Concluídas (1-3)
 
-CRUD completo de playlists
-Interface responsiva com Ant Design
-
-## Fase 2 - Upload e Gerenciamento de Arquivos
-
-Upload de MP4, JPEG, PNG (até 500MB)
-Associação de arquivos às playlists
-Remoção de arquivos
-
-## Fase 3 - Reprodução Básica
-
-Player de mídia funcional
-Controle via dashboard
-
-## Fase 4 - Tempo Real e Automação
+## O que foi concluído da Fase 4 :
 
 Atualização automática de playlists
 Transições simples entre mídias
 WebSocket para sincronização em tempo real
-SignalR para comunicação entre dashboards
 
-## Próximas Implementações
-Com mais tempo disponível:
-Funcionalidades Pendentes do Desafio
+## O que faria com mais tempo disponível
 
+Funcionalidades Pendentes do Desafio:
 Autenticação JWT básica
-Testes automatizados (unitários e integração)
+Testes automatizados 
 
 ## Escalabilidade e Arquitetura
 
@@ -141,10 +124,3 @@ Suporte a múltiplos outputs simultâneos
 
 Migrar armazenamento de BLOBs para AWS S3/Azure Blob Storage
 Cache distribuído para arquivos de mídia
-Otimização de queries com índices no PostgreSQL
-
-
-## Controles Avançados
-Sistema de logs estruturado
-Monitoramento de saúde da aplicação
-Configuração por variáveis de ambiente
