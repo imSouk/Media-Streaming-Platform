@@ -9,10 +9,10 @@
 - **Tailwind CSS** 
 - **SignalR Client**
 ### Backend
-- **.NET 8** - API REST
-- **Entity Framework Core** - ORM
-- **SignalR** - WebSockets
-- **PostgreSQL** - Banco de dados
+- **.NET 8**
+- **Entity Framework Core** 
+- **SignalR** 
+- **PostgreSQL** 
 
 ## requisitos para rodar localmente
 
