@@ -1,36 +1,18 @@
-# Media Streaming Platform
-
-## Funcionalidades
-### Dashboard (Input)
-- Criação e exclusão de playlists
-- Upload de arquivos de mídia (MP4, JPEG, PNG)
-- Adição e remoção de arquivos nas playlists
-- Controle de reprodução via SignalR
-- Limite de arquivo de 500MB
-
-### Player (Output)
-- Reprodução automática da playlist selecionada
-- Atualização em tempo real via WebSocket
-- Transições simples entre mídias
-- Sincronização automática com o dashboard
+# Desafio Técnico – Sistema de Player de Mídias
 
 ## Tecnologias Utilizadas
 
 ### Frontend
-- **React 18** com TypeScript
+- **React ** com TypeScript
 - **Vite** (versão mais recente)
-- **Ant Design** - Componentes UI
-- **Tailwind CSS** - Estilização
-- **SignalR Client** - Comunicação em tempo real
-
+- **Ant Design** 
+- **Tailwind CSS** 
+- **SignalR Client**
 ### Backend
 - **.NET 8** - API REST
 - **Entity Framework Core** - ORM
 - **SignalR** - WebSockets
 - **PostgreSQL** - Banco de dados
-
-### Arquitetura
-- **Clean Architecture** com separação de responsabilidades
 
 ## requisitos para rodar localmente
 
@@ -100,36 +82,19 @@ Player disponível em: `http://localhost:5174`
 
 ## Status do Projeto
 
-## Fases Concluídas (1-4)
-## Fase 1 - Gerenciamento de Playlists
+## Fases Concluídas (1-3)
 
-CRUD completo de playlists
-Interface responsiva com Ant Design
-
-## Fase 2 - Upload e Gerenciamento de Arquivos
-
-Upload de MP4, JPEG, PNG (até 500MB)
-Associação de arquivos às playlists
-Remoção de arquivos
-
-## Fase 3 - Reprodução Básica
-
-Player de mídia funcional
-Controle via dashboard
-
-## Fase 4 - Tempo Real e Automação
+## O que foi concluído da Fase 4 :
 
 Atualização automática de playlists
 Transições simples entre mídias
 WebSocket para sincronização em tempo real
-SignalR para comunicação entre dashboards
 
-## Próximas Implementações
-Com mais tempo disponível:
-Funcionalidades Pendentes do Desafio
+## O que faria com mais tempo disponível
 
+Funcionalidades Pendentes do Desafio:
 Autenticação JWT básica
-Testes automatizados (unitários e integração)
+Testes automatizados 
 
 ## Escalabilidade e Arquitetura
 
@@ -142,10 +107,3 @@ Suporte a múltiplos outputs simultâneos
 
 Migrar armazenamento de BLOBs para AWS S3/Azure Blob Storage
 Cache distribuído para arquivos de mídia
-Otimização de queries com índices no PostgreSQL
-
-
-## Controles Avançados
-Sistema de logs estruturado
-Monitoramento de saúde da aplicação
-Configuração por variáveis de ambiente
